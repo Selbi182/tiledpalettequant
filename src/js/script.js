@@ -203,6 +203,8 @@ function quantizeSourceImage(sourceImage) {
     const settingsStr = `-${tileWidthInput.value}x${tileHeightInput.value}-${numPalettesInput.value}p${colorsPerPaletteInput.value}c-${colorZeroAbbreviation}`;
     const totalPaletteColors = parseInt(numPalettesInput.value, radix) *
         parseInt(colorsPerPaletteInput.value, radix);
+    
+    /*
     if (totalPaletteColors > 256) {
         quantizedImageDownload.download =
             sourceImageName + settingsStr + ".png";
@@ -211,6 +213,9 @@ function quantizeSourceImage(sourceImage) {
         quantizedImageDownload.download =
             sourceImageName + settingsStr + ".bmp";
     }
+    */
+    quantizedImageDownload.download = sourceImageName + settingsStr + ".png";
+    
     palettesImageDownload.download =
         sourceImageName + settingsStr + "-palette.png";
     if (worker)
@@ -234,12 +239,16 @@ function quantizeSourceImage(sourceImage) {
             quantizedImage.height = imageData.height;
             const ctx = quantizedImage.getContext("2d");
             ctx.putImageData(quantizedImageData, 0, 0);
+            
+            /*
             if (imageData.totalPaletteColors > 256) {
                 quantizedImageDownload.href = quantizedImage.toDataURL();
             }
             else {
                 quantizedImageDownload.href = bmpToDataURL(imageData.width, imageData.height, imageData.paletteData, imageData.colorIndexes);
             }
+            */
+            quantizedImageDownload.href = quantizedImage.toDataURL();
         }
         else if (data.action === Action.UpdatePalettes) {
             const palettes = data.palettes;
