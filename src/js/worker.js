@@ -1240,4 +1240,3 @@ function minIndex(values) {
     }
     return minI;
 }
-//# sourceMappingURL=worker.js.map

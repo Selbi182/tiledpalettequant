@@ -1,4 +1,3 @@
-import { Action, ColorZeroBehaviour, Dither, DitherPattern } from "./enums.js";
 const body = document.getElementById("body");
 const imageSelector = document.getElementById("image_selector");
 const tileWidthInput = document.getElementById("tile_width");
@@ -67,6 +66,7 @@ const colorValues = [
     transparentColorInput,
     transparentColorInput,
 ];
+
 const ditherOffInput = document.getElementById("dither_off");
 const ditherFastInput = document.getElementById("dither_fast");
 const ditherSlowInput = document.getElementById("dither_slow");
@@ -95,14 +95,19 @@ const ditherPatternValues = [
     DitherPattern.Horizontal2,
     DitherPattern.Vertical2,
 ];
-let sourceImageName = "carina";
-let sourceImage = document.getElementById("source_img");
+
+let sourceImageName = "Saldana";
+let sourceImagePreview = document.getElementById("source_img");
+let sourceImageFilename = document.getElementById("source_filename");
+sourceImagePreview.parentElement.onclick = () => imageSelector.click();
+
 body.addEventListener("dragover", (event) => {
     event.preventDefault();
     if (event.dataTransfer == null)
         return;
     event.dataTransfer.dropEffect = "move";
 });
+
 body.addEventListener("drop", (event) => {
     event.preventDefault();
     const dt = event.dataTransfer;
@@ -112,19 +117,23 @@ body.addEventListener("drop", (event) => {
         const file = dt.files[0];
         if (file.type.substring(0, 6) === "image/") {
             sourceImageName = file.name.substring(0, file.name.lastIndexOf("."));
-            sourceImage.src = URL.createObjectURL(file);
+            sourceImagePreview.src = URL.createObjectURL(file);
         }
     }
 });
+
 imageSelector.addEventListener("change", () => {
     if (imageSelector.files == null)
         return;
     if (imageSelector.files.length > 0) {
         const file = imageSelector.files[0];
         sourceImageName = file.name.substring(0, file.name.lastIndexOf("."));
-        sourceImage.src = URL.createObjectURL(file);
+        const imgUrl = URL.createObjectURL(file);
+        sourceImagePreview.src = imgUrl;
+        sourceImageFilename.innerHTML = file.name;
     }
 });
+
 let inProgress = false;
 let quantizedImageDownload = document.createElement("a");
 let palettesImageDownload = document.createElement("a");
@@ -135,29 +144,40 @@ const quantizeButton = document.getElementById("quantizeButton");
 const quantizedImages = document.getElementById("quantized_images");
 const progress = document.getElementById("progress");
 const radix = 10;
+
+let sourceImageReal = new Image();
 quantizeButton.addEventListener("click", () => {
-    sourceImage = document.getElementById("source_img");
+    // Dereference image loading to avoid quirks with client-side width/height adjustments
+    sourceImageReal.onload = () => {
+        quantizeSourceImage(sourceImageReal);
+    };
+    sourceImageReal.src = document.getElementById("source_img").src;
+});
+
+function quantizeSourceImage(sourceImage) {
     if (!inProgress) {
         inProgress = true;
+        
         quantizedImage = document.createElement("canvas");
         quantizedImage.width = sourceImage.width;
         quantizedImage.height = sourceImage.height;
-        quantizedImage.style.marginTop = "8px";
-        quantizedImage.style.marginLeft = "8px";
+        quantizedImage.title = "Click to download quantized image";
         quantizedImageDownload = document.createElement("a");
         quantizedImageDownload.appendChild(quantizedImage);
+        
         palettesImage = document.createElement("canvas");
         palettesImage.width = 16;
         palettesImage.height = sourceImage.height;
-        palettesImage.style.marginTop = "8px";
-        palettesImage.style.marginLeft = "8px";
+        palettesImage.title = "Click to download palette image";
         palettesImageDownload = document.createElement("a");
         palettesImageDownload.appendChild(palettesImage);
+        
         const div = document.createElement("div");
         div.appendChild(quantizedImageDownload);
         div.appendChild(palettesImageDownload);
         quantizedImages.prepend(div);
     }
+    
     integerInputs.forEach(validateIntegerInput);
     validateFloatInput([fractionOfPixelsInput, 0.1]);
     validateFloatInput([ditherWeightInput, 0.5]);
@@ -244,7 +264,8 @@ quantizeButton.addEventListener("click", () => {
             ditherPattern: ditherPattern,
         },
     });
-});
+}
+
 function hexToColor(colorStr) {
     return [
         parseInt(colorStr.slice(1, 3), 16),
@@ -252,6 +273,7 @@ function hexToColor(colorStr) {
         parseInt(colorStr.slice(5, 7), 16),
     ];
 }
+
 function selectedValue(radioInputs, values) {
     for (let i = 0; i < radioInputs.length; i++) {
         if (radioInputs[i].checked) {
@@ -260,6 +282,7 @@ function selectedValue(radioInputs, values) {
     }
     throw "No radio inputs selected";
 }
+
 function imageDataFrom(img) {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
@@ -268,6 +291,7 @@ function imageDataFrom(img) {
     context.drawImage(img, 0, 0);
     return context.getImageData(0, 0, img.width, img.height);
 }
+
 function bmpToDataURL(width, height, paletteData, colorIndexes) {
     const bmpFileSize = 54 + paletteData.length + colorIndexes.length;
     const bmpData = new Uint8ClampedArray(bmpFileSize);
@@ -296,12 +320,14 @@ function bmpToDataURL(width, height, paletteData, colorIndexes) {
     }
     return "data:image/bmp;base64," + uint8ToBase64(bmpData);
 }
+
 function uint8ToBase64(arr) {
     return btoa(Array(arr.length)
         .fill("")
         .map((_, i) => String.fromCharCode(arr[i]))
         .join(""));
 }
+
 function write32Le(bmpData, index, value) {
     bmpData[index] = value % 256;
     value = Math.floor(value / 256);
@@ -311,9 +337,9 @@ function write32Le(bmpData, index, value) {
     value = Math.floor(value / 256);
     bmpData[index + 3] = value % 256;
 }
+
 function write16Le(bmpData, index, value) {
     bmpData[index] = value % 256;
     value = Math.floor(value / 256);
     bmpData[index + 1] = value % 256;
 }
-//# sourceMappingURL=script.js.map
