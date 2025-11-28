@@ -15,37 +15,37 @@
 <body>
   <div id="body">
     <fieldset id="input_field"  title="Click or drop file to change source image...">
-      <legend>Input image</legend>
+      <legend>Source Image</legend>
       <img id="source_img" src="img/Saldana_Pablo-Garcia.png" alt="Source Image">
       <div id="source_filename">Click or drop file to change source image...</div>
-      <input type="file" id="image_selector" accept="image/*">
+      <input autocomplete="off" type="file" id="image_selector" accept="image/*">
     </fieldset>
     <fieldset>
       <legend>Quantization Settings</legend>
       <table>
         <tr>
           <td><label for="tile_width">Tile Width</label></td>
-          <td><input type="number" id="tile_width" min="1" max="32" step="1" value="8"></td>
+          <td><input autocomplete="off" type="number" id="tile_width" min="1" max="32" step="1" value="8"></td>
         </tr>
         <tr>
           <td><label for="tile_height">Tile Height</label></td>
-          <td><input type="number" id="tile_height" min="1" max="32" step="1" value="8"></td>
+          <td><input autocomplete="off" type="number" id="tile_height" min="1" max="32" step="1" value="8"></td>
         </tr>
         <tr>
           <td><label for="palette_num">Palettes Lines:</label></td>
-          <td><input type="number" id="palette_num" min="1" max="16" step="1" value="1"></td>
+          <td><input autocomplete="off" type="number" id="palette_num" min="1" max="16" step="1" value="1"></td>
         </tr>
         <tr>
           <td><label for="colors_per_palette">Colors Per Palette:</label></td>
-          <td><input type="number" id="colors_per_palette" min="2" max="256" step="1" value="15"></td>
+          <td><input autocomplete="off" type="number" id="colors_per_palette" min="2" max="256" step="1" value="15"></td>
         </tr>
         <tr>
           <td><label for="bits_per_channel">Bits Per Channel:</label></td>
-          <td><input type="number" id="bits_per_channel" min="2" max="8" step="1" value="4"></td>
+          <td><input autocomplete="off" type="number" id="bits_per_channel" min="2" max="8" step="1" value="4"></td>
         </tr>
         <tr>
           <td><label for="fraction_of_pixels">Fraction of Pixels:</label></td>
-          <td><input type="number" id="fraction_of_pixels" min="0.01" max="10" step="any" value="0.1"></td>
+          <td><input autocomplete="off" type="number" id="fraction_of_pixels" min="0.01" max="10" step="any" value="0.1"></td>
         </tr>
       </table>
     </fieldset>
@@ -54,28 +54,28 @@
       <table>
         <tr>
           <td>
-            <input type="radio" id="unique" name="color_zero" value="unique" checked>
+            <input autocomplete="off" type="radio" id="unique" name="color_zero" value="unique" checked>
             <label for="unique">Unique</label>
           </td>
         </tr>
         <tr>
           <td>
-            <input type="radio" id="shared" name="color_zero" value="shared">
+            <input autocomplete="off" type="radio" id="shared" name="color_zero" value="shared">
             <label for="shared">Shared Color:</label>
-            <input type="color" id="shared_color" value="#000000" aria-label="shared color">
+            <input autocomplete="off" type="color" id="shared_color" value="#000000" aria-label="shared color">
           </td>
         </tr>
         <tr>
           <td>
-            <input type="radio" id="transparent_from_transparent" name="color_zero" value="transparent_from_transparent">
+            <input autocomplete="off" type="radio" id="transparent_from_transparent" name="color_zero" value="transparent_from_transparent">
             <label for="transparent_from_transparent">Transparent (from transparent pixels)</label>
           </td>
         </tr>
         <tr>
           <td>
-            <input type="radio" id="transparent_from_color" name="color_zero" value="transparent_from_color">
+            <input autocomplete="off" type="radio" id="transparent_from_color" name="color_zero" value="transparent_from_color">
             <label for="transparent_from_color">Transparent Color:</label>
-            <input type="color" id="transparent_color" value="#ff00ff" aria-label="transparent color">
+            <input autocomplete="off" type="color" id="transparent_color" value="#ff00ff" aria-label="transparent color">
           </td>
         </tr>
       </table>
@@ -85,25 +85,25 @@
       <table>
         <tr>
           <td>
-            <input type="radio" id="dither_off" name="dither" value="dither_off" checked>
+            <input autocomplete="off" type="radio" id="dither_off" name="dither" value="dither_off" checked>
             <label for="dither_off">Disabled</label>
           </td>
         </tr>
         <tr>
           <td>
-            <input type="radio" id="dither_fast" name="dither" value="dither_fast">
+            <input autocomplete="off" type="radio" id="dither_fast" name="dither" value="dither_fast">
             <label for="dither_fast">Fast</label>
           </td>
         </tr>
         <tr>
           <td>
-            <input type="radio" id="dither_slow" name="dither" value="dither_slow">
+            <input autocomplete="off" type="radio" id="dither_slow" name="dither" value="dither_slow">
             <label for="dither_slow">Slow</label>
           </td>
         </tr>
         <tr>
           <td><label for="dither_weight">Dither Weight:</label></td>
-          <td><input type="number" id="dither_weight" min="0.01" max="1" step="any" value="0.5"></td>
+          <td><input autocomplete="off" type="number" id="dither_weight" min="0.01" max="1" step="any" value="0.5"></td>
         </tr>
       </table>
       <fieldset>
@@ -111,31 +111,31 @@
         <table>
           <tr>
             <td>
-              <input type="radio" id="dither_diagonal4" name="dither_pattern" value="dither_diagonal4" checked>
+              <input autocomplete="off" type="radio" id="dither_diagonal4" name="dither_pattern" value="dither_diagonal4" checked>
               <label for="dither_diagonal4">Diagonal-4</label>
             </td>
             <td>
-              <input type="radio" id="dither_diagonal2" name="dither_pattern" value="dither_diagonal2">
+              <input autocomplete="off" type="radio" id="dither_diagonal2" name="dither_pattern" value="dither_diagonal2">
               <label for="dither_diagonal2">Diagonal-2</label>
             </td>
           </tr>
           <tr>
             <td>
-              <input type="radio" id="dither_horizontal4" name="dither_pattern" value="dither_horizontal4">
+              <input autocomplete="off" type="radio" id="dither_horizontal4" name="dither_pattern" value="dither_horizontal4">
               <label for="dither_horizontal4">Horizontal-4</label>
             </td>
             <td>
-              <input type="radio" id="dither_horizontal2" name="dither_pattern" value="dither_horizontal2">
+              <input autocomplete="off" type="radio" id="dither_horizontal2" name="dither_pattern" value="dither_horizontal2">
               <label for="dither_horizontal2">Horizontal-2</label>
             </td>
           </tr>
           <tr>
             <td>
-              <input type="radio" id="dither_vertical4" name="dither_pattern" value="dither_vertical4">
+              <input autocomplete="off" type="radio" id="dither_vertical4" name="dither_pattern" value="dither_vertical4">
               <label for="dither_vertical4">Vertical-4</label>
             </td>
             <td>
-              <input type="radio" id="dither_vertical2" name="dither_pattern" value="dither_vertical2">
+              <input autocomplete="off" type="radio" id="dither_vertical2" name="dither_pattern" value="dither_vertical2">
               <label for="dither_vertical2">Vertical-2</label>
             </td>
           </tr>
