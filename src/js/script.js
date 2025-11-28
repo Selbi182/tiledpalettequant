@@ -10,7 +10,7 @@ const integerInputs = [
     [tileWidthInput, 8],
     [tileHeightInput, 8],
     [numPalettesInput, 1],
-    [colorsPerPaletteInput, 15],
+    [colorsPerPaletteInput, 16],
     [bitsPerChannelInput, 4],
 ];
 function validateIntegerInput(numberInput) {

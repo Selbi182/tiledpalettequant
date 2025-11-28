@@ -11,7 +11,7 @@ It's permanently accessible here: https://tiledpalettequant.selbi.club/
   - Always download quantized image as .png (never .bmp)
   - Changed default values:
     - Palettes: 1 (used to be 8)
-    - Colors per palette: 15 (used to be 4)
+    - Colors per palette: 16 (used to be 4)
     - Bits per channel: 4 (used to be 5)
 - Website:
   - Gave the site a huge visual facelift to make it look less like it was created in the 90s

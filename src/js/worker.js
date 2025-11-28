@@ -61,7 +61,7 @@ let quantizationOptions = {
     tileWidth: 8,
     tileHeight: 8,
     numPalettes: 1,
-    colorsPerPalette: 15,
+    colorsPerPalette: 16,
     bitsPerChannel: 4,
     fractionOfPixels: 0.1,
     colorZeroBehaviour: ColorZeroBehaviour.Unique,
