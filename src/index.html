@@ -80,7 +80,7 @@
         </tr>
       </table>
     </fieldset>
-    <fieldset>
+    <fieldset id="dither_settings">
       <legend>Dithering</legend>
       <table>
         <tr>
@@ -101,12 +101,12 @@
             <label for="dither_slow">Slow</label>
           </td>
         </tr>
-        <tr>
-          <td><label for="dither_weight">Dither Weight:</label></td>
-          <td><input autocomplete="off" type="number" id="dither_weight" min="0.01" max="1" step="any" value="0.5"></td>
-        </tr>
       </table>
-      <fieldset>
+      <fieldset class="disableable" disabled>
+        <legend>Dither Weight</legend>
+        <input autocomplete="off" type="number" id="dither_weight" min="0.01" max="1" step="any" value="0.5">
+      </fieldset>
+      <fieldset class="disableable" disabled>
         <legend>Dither Pattern</legend>
         <table>
           <tr>

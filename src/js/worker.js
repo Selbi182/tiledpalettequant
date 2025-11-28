@@ -60,9 +60,9 @@ let ditherPixels = 4;
 let quantizationOptions = {
     tileWidth: 8,
     tileHeight: 8,
-    numPalettes: 8,
-    colorsPerPalette: 4,
-    bitsPerChannel: 5,
+    numPalettes: 1,
+    colorsPerPalette: 15,
+    bitsPerChannel: 4,
     fractionOfPixels: 0.1,
     colorZeroBehaviour: ColorZeroBehaviour.Unique,
     colorZeroValue: [0, 0, 0],

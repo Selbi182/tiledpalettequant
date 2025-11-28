@@ -9,9 +9,9 @@ const fractionOfPixelsInput = document.getElementById("fraction_of_pixels");
 const integerInputs = [
     [tileWidthInput, 8],
     [tileHeightInput, 8],
-    [numPalettesInput, 8],
-    [colorsPerPaletteInput, 4],
-    [bitsPerChannelInput, 5],
+    [numPalettesInput, 1],
+    [colorsPerPaletteInput, 15],
+    [bitsPerChannelInput, 4],
 ];
 function validateIntegerInput(numberInput) {
     const [inputElement, defaultValue] = numberInput;
@@ -134,6 +134,19 @@ imageSelector.addEventListener("change", () => {
     }
 });
 
+document.getElementById('dither_settings').addEventListener('change', el => {
+    if (el.target.type === 'radio') {
+      const isOff = document.getElementById("dither_off").checked;
+      document.querySelectorAll("fieldset .disableable").forEach(fs => {
+          if (isOff) {
+            fs.setAttribute("disabled", "");   
+          } else {
+            fs.removeAttribute("disabled");
+          }
+      });
+    }
+});
+
 let inProgress = false;
 let quantizedImageDownload = document.createElement("a");
 let palettesImageDownload = document.createElement("a");
@@ -202,7 +215,7 @@ function quantizeSourceImage(sourceImage) {
         sourceImageName + settingsStr + "-palette.png";
     if (worker)
         worker.terminate();
-    worker = new Worker("./worker.js");
+    worker = new Worker("./js/worker.js");
     worker.onmessage = function (event) {
         const data = event.data;
         if (data.action === Action.UpdateProgress) {
