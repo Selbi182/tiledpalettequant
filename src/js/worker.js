@@ -1210,7 +1210,16 @@ function clampColor(color, minValue, maxValue) {
 const alphaValues = [0, 255, 85, 36.42857, 17, 8.22581, 4.04762, 2.00787, 1];
 function toNbit(value, n) {
     const alpha = alphaValues[n];
-    return Math.round(Math.round(value / alpha) * alpha);
+    const rounded = roundToEven(roundToEven(value / alpha) * alpha);
+
+    /*
+    if (skip0thBit) {
+        const noFirstBit = rounded & 0xEE;
+        // console.log(`${rounded.toString(16)} -> ${noFirstBit.toString(16)}`);
+        return noFirstBit;
+    }
+    */
+    return rounded;
 }
 function toNbitColor(color, n) {
     for (let i = 0; i < 3; i++) {
@@ -1239,4 +1248,7 @@ function minIndex(values) {
         }
     }
     return minI;
+}
+function roundToEven(num) {
+    return Math.floor(num) % 2 === 0 ? Math.floor(num) : Math.floor(num) - 1;
 }
