@@ -8,13 +8,14 @@ It's permanently accessible here: https://tiledpalettequant.selbi.club/
 
 - Quantization:
   - Palette images are generated with 8x8 pixels per color instead of 16x16. This is a requirement of many art importers, including SonPLN and GetArt.NET
-  - Always download quantized image as .png (never .bmp)
+  - Added a checkbox to limit color space to the Mega Drive range (enabled by default)
   - Changed default values:
     - Palettes: 1 (used to be 8)
     - Colors per palette: 16 (used to be 4)
     - Bits per channel: 4 (used to be 5)
 - Website:
   - Gave the site a huge visual facelift to make it look less like it was created in the 90s
+  - Always download quantized image as .png (never .bmp)
   - Disable dither settings when set to Off
   - Disabled autocomplete for all inputs
   - Dereference image loading to avoid quirks with client-side width/height adjustments
